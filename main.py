@@ -24,7 +24,7 @@ app = FastAPI()
 
 @app.get('/')
 async def dummy():
-    return {'detail1': 'Hallo', 'detail2': 'Auf Wiedersehen für immer!'}
+    return {'detail1': 'Hallo', 'detail2': 'Auf Wiedersehen für immer, Fotze!'}
 
 #@app.get('/API/prediction')
 #async def predict_all(steps: int = 12, alpha: float=0.05):
