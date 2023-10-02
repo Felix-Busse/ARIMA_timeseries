@@ -7,23 +7,27 @@ import sys
 from fastapi import FastAPI
 
 # Add path of subdirectory containing own modules
-modules_path = os.path.join(os.getcwd(), 'modules')
-if modules_path not in sys.path:
-    sys.path.append(modules_path)
+#modules_path = os.path.join(os.getcwd(), 'modules')
+#if modules_path not in sys.path:
+#    sys.path.append(modules_path)
 
 # Load own class
-from train_compositions import TrainLengthModel
+#from train_compositions import TrainLengthModel
 
 # Initiate instance of FastAPI application
 app = FastAPI()
 
 # Define subdirectory of trained models and load models from there
-models_file_name = 'trained_time_series.pkl'
-models_path = os.path.join(os.getcwd(), 'models', models_file_name)
-models = joblib.load(models_path)
+#models_file_name = 'trained_time_series.pkl'
+#models_path = os.path.join(os.getcwd(), 'models', models_file_name)
+#models = joblib.load(models_path)
 
-@app.get('/API/prediction')
-async def predict_all(steps: int = 12, alpha: float=0.05):
+@app.get('/')
+async def dummy():
+    return {'detail1': 'Hallo', 'detail2': 'Auf Wiedersehen für immer!'}
+
+#@app.get('/API/prediction')
+#async def predict_all(steps: int = 12, alpha: float=0.05):
     '''Function returns predictions for all combinations of "train_category" and "day_of_week" available.
     
     Parameters:
@@ -32,14 +36,14 @@ async def predict_all(steps: int = 12, alpha: float=0.05):
     '''
     # Create empty dictionary, than iterate over all models available and add model's attributes to dictionary
     result_dict = {} 
-    for i, model in enumerate(models):
-        result_dict.update({('model_'+str(i)): {
-            'train_category': model.train_category,
-            'day_of_week': model.day_of_week,
-            'prediction': model.predict(steps=steps, alpha=alpha)}
-        })
+#    for i, model in enumerate(models):
+#        result_dict.update({('model_'+str(i)): {
+#            'train_category': model.train_category,
+#            'day_of_week': model.day_of_week,
+#            'prediction': model.predict(steps=steps, alpha=alpha)}
+ #       })
     # Return dictionary with properties (especially predictions) of all models
-    return result_dict
+ #   return result_dict
 
 #@app.get('/API/prediction/{train_category}/{day_of_week}')
 #async def predict(day_of_week: str, train_category: str, 
